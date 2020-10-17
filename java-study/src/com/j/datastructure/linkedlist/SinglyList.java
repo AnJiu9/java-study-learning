@@ -11,6 +11,7 @@ public class SinglyList<T extends Comparable> extends Object {
     public Node<T> head;
 
     public SinglyList(){
+
         this.head = new Node<T>();
     }
 
@@ -25,6 +26,8 @@ public class SinglyList<T extends Comparable> extends Object {
             }
         }
     }
+
+
 
     public boolean isEmpty(){
         return this.head.next==null;
@@ -164,11 +167,46 @@ public class SinglyList<T extends Comparable> extends Object {
 
     }*/
 
-    public void merge(SinglyList<Integer> list){
-        Node<T> p, q, t, s;
+    public Node<T> merge(SinglyList<T> list2) {
+        Node<T> t, p, q, s;
+        t = this.head;
         p = this.head.next;
+        q = list2.head.next;
+        s = q.next;
 
+        if (p == null) {
+            return list2.head;
+        }
+        while (p != null && q != null){
+            if(p.data.equals(q.data)){
+                p = p.next;
+                t = t.next;
+                q = q.next;
+                if(s == null){
+                    break;
+                }else {
+                    s = s.next;
+                }
+            }else if(p.data.compareTo(q.data) > 0){
+                q.next = t.next;
+                t.next = q;
+                t = t.next;
+                q = s;
+                if(s == null){
+                    break;
+                }else {
+                    s = s.next;
+                }
+            }else if(p.data.compareTo(q.data) < 0){
+                p = p.next;
+                t = t.next;
+            }
+
+        }
+        return p;
     }
+
+
 
 
     public void print(){
@@ -182,43 +220,54 @@ public class SinglyList<T extends Comparable> extends Object {
     }
 
     public static void main(String[] args) {
-        Integer []l1 = {1,3,5};
-        Integer []l2 = {2,3,4};
+        Integer[] l1 = {1,2,3,5};
+        Integer[] l2 = {4,5,6};
 
         SinglyList<Integer> lists = new SinglyList<Integer>(l1);
-        SinglyList<Integer> lista = new SinglyList<Integer>(l2);
+        SinglyList<Integer> list2 = new SinglyList<Integer>(l2);
 
-        System.out.println("单链表所有节点");
+
+//        Node<Integer> merge = lists.merge(list2);
+//        SinglyList<Integer> singlyList = new SinglyList<Integer>(merge);
+//        System.out.println("合并");
+//        lists.print();
+
+        lists.merge(list2);
         lists.print();
-        System.out.println(" \n" + "单链表长度："  + lists.size());
-        System.out.println("获取指定元素：" + lists.get(3));
+        
 
-        System.out.println("修改指定下标元素");
-        lists.set(2, 3);
-        lists.print();
 
-        System.out.println("\n" + "删除指定下标元素");
-        lists.remove(3);
-        lists.print();
-
-        System.out.println("\n" + "查找的元素下标：");
-        System.out.println(lists.search(1));
-
-        System.out.println("\n" + "根据关键字删除");
-        lists.remove(5);
-        lists.print();
-
-        System.out.println("\n" + "末尾添加");
-        lists.insert(6);
-        lists.print();
-
-        System.out.println("\n" + "在指定位置插入数据");
-        lists.insert(2,3);
-        lists.print();
-
-        System.out.println("\n" + "逆置单链表");
-        lists.reverse(lists);
-        lists.print();
+//        System.out.println("单链表所有节点");
+//        lists.print();
+//        System.out.println(" \n" + "单链表长度："  + lists.size());
+//        System.out.println("获取指定元素：" + lists.get(3));
+//
+//        System.out.println("修改指定下标元素");
+//        lists.set(2, 3);
+//        lists.print();
+//
+//        System.out.println("\n" + "删除指定下标元素");
+//        lists.remove(3);
+//        lists.print();
+//
+//        System.out.println("\n" + "查找的元素下标：");
+//        System.out.println(lists.search(1));
+//
+//        System.out.println("\n" + "根据关键字删除");
+//        lists.remove(5);
+//        lists.print();
+//
+//        System.out.println("\n" + "末尾添加");
+//        lists.insert(6);
+//        lists.print();
+//
+//        System.out.println("\n" + "在指定位置插入数据");
+//        lists.insert(2,3);
+//        lists.print();
+//
+//        System.out.println("\n" + "逆置单链表");
+//        lists.reverse(lists);
+//        lists.print();
 
     }
 }
