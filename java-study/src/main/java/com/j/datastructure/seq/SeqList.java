@@ -7,15 +7,15 @@ package com.j.datastructure.seq;
  * @Date 13.10.20
  **/
 
-public class SeqList<T> extends Object{				//T 范型类
+public class SeqList<T> extends Object{
     protected int n;
     protected Object[] element;
-    private static final int MIN_CAPACITY = 16;		//常量
+    private static final int MIN_CAPACITY = 16;
 
     public SeqList(int length) {
         if(length < MIN_CAPACITY)
             length = MIN_CAPACITY;
-        this.element = new Object[length];			//申请数组空间，元素为null
+        this.element = new Object[length];
         this.n = 0;
     }
 
@@ -27,7 +27,7 @@ public class SeqList<T> extends Object{				//T 范型类
         this(values.length*2);
         for(int i = 0; i < values.length; i++)
             if(values[i] != null)
-                this.element[this.n++] = values[i]; 	//对象引用赋值
+                this.element[this.n++] = values[i];
     }
 
     public boolean isEmpty() {
@@ -53,6 +53,7 @@ public class SeqList<T> extends Object{				//T 范型类
             throw new java.lang.IndexOutOfBoundsException(i + "");
     }
 
+    @Override
     public String toString() {
         String str = this.getClass().getName() + "(";
         if(this.n > 0)
@@ -71,41 +72,49 @@ public class SeqList<T> extends Object{				//T 范型类
         if(i > this.n)
             i = this.n;
 
-        Object[] source = this.element;		//source 引用element数组
+        Object[] source = this.element;
 
-        if(this.n == element.length) {		//若数组个数已满，则扩充顺序表的数组容量
-            this.element = new Object[source.length *2];	//new一个容量更大的数组
-            for(int j = 0; j < i; j--)		//复制当前数组前i-1个元素
-                this.element[j] = source[j];	//复制数组元素，传递对象引用
+        if(this.n == element.length) {
+            this.element = new Object[source.length *2];
+            for(int j = 0; j < i; j--)
+                this.element[j] = source[j];
         }
 
-        for(int j = this.n-1; j >= i; j--)	//从i开始至表尾的元素向后移动，次序从后向前
-            this.element[j+1] = source[j];	//复制数组元素，传递对象引用
+        for(int j = this.n-1; j >= i; j--)
+            this.element[j+1] = source[j];
         this.element[i] = x;
-        this.n++;		//每插入一个数组元素，数组个数+1
-        return i;		//返回插入的元素序号
+        this.n++;
+        return i;
     }
 
-    public int insert(T x) {				//顺序表末尾插入x元素， 成员方法重载
-        return this.insert(this.n, x);		//调用insert(i，x)方法
+    public int insert(T x) {
+        return this.insert(this.n, x);
     }
 
-    public T remove(int i) {	//删除第i个元素， 0≤i<n, 返回被删除元素，若i越界返回null
+    public int search(T key){
+        for(int i =0; i<this.n; i++){
+            if(key == this.element[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public T remove(int i) {
         if(i >=0 && i<this.n) {
-            T x = (T)this.element[i];	//将需要删除的元素进行强制类型转换为T并保存在变量x中
+            T x = (T)this.element[i];
 
             for(int j = i; j < this.n-1; j++)
-                this.element[j] = this.element[j+1];	//元素前移一个位置
+                this.element[j] = this.element[j+1];
             this.element[this.n-1] = null;
-            this.n--;	//每删除一个元素，数组个数-1
-            return x;	//返回被删除的元素
+            this.n--;
+            return x;
         }
-        return null;	//若i越界返回null
+        return null;
     }
 
     public T remove(T key) {
         // 遍历顺序表，查找指定的元素，并返回该元素所在的位置
-        for(int i=0; i<this.n; i++)
+        for(int i=0; i<this.n; i++) {
             if(key.equals(this.element[i])) {
                 // 每个元素前移一个位置
                 for(int j=i; j<this.n-1; j++)
@@ -117,6 +126,7 @@ public class SeqList<T> extends Object{				//T 范型类
                 // 返回被删除的元素
                 return key;
             }
+        }
         // 未找到时，返回 null
         return null;
     }
@@ -134,6 +144,8 @@ public class SeqList<T> extends Object{				//T 范型类
         System.out.println(lista.toString());
         lista.remove(2);
         System.out.println(lista.toString());
+        System.out.println(lista.search("A"));
+
 
     }
 }
