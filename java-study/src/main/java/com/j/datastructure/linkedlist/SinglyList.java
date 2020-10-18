@@ -1,5 +1,7 @@
 package com.j.datastructure.linkedlist;
 
+import java.text.BreakIterator;
+
 /**
  * @ClassName SinglyList
  * @Description TODO
@@ -206,6 +208,46 @@ public class SinglyList<T extends Comparable> extends Object {
         return p;
     }
 
+    public Node<T> merge2(SinglyList<T> list2) {
+        Node<T> t, p, q, s;
+        t = this.head;
+        p = t.next;
+        q = list2.head.next;
+        s = q.next;
+        if(p == null){
+            return list2.head;
+        }
+        while (p != null && q != null){
+            if(p.data.equals(q.data)){
+               p = p.next;
+               t = t.next;
+               q.next = p;
+               t.next = q;
+               t = q;
+               q = s;
+                if(s == null){
+                    break;
+                }else {
+                    s = s.next;
+                }
+            }else if(p.data.compareTo(q.data) > 0){
+                q.next = t.next;
+                t.next = q;
+                t = t.next;
+                q = s;
+                if(s == null){
+                    break;
+                }else {
+                    s = s.next;
+                }
+            }else if(p.data.compareTo(q.data) < 0){
+                p = p.next;
+                t = t.next;
+            }
+
+        }
+        return p;
+    }
 
 
 
@@ -220,20 +262,30 @@ public class SinglyList<T extends Comparable> extends Object {
     }
 
     public static void main(String[] args) {
-        Integer[] l1 = {1,2,3,5};
-        Integer[] l2 = {4,5,6};
+        Integer[] l1 = {1,3,5};
+        Integer[] l2 = {2,3,4};
 
         SinglyList<Integer> lists = new SinglyList<Integer>(l1);
         SinglyList<Integer> list2 = new SinglyList<Integer>(l2);
+
+        Integer[] l3 = {1,3,5};
+        Integer[] l4 = {2,3,4};
+
+        SinglyList<Integer> list3 = new SinglyList<Integer>(l3);
+        SinglyList<Integer> list4 = new SinglyList<Integer>(l4);
 
 
 //        Node<Integer> merge = lists.merge(list2);
 //        SinglyList<Integer> singlyList = new SinglyList<Integer>(merge);
 //        System.out.println("合并");
 //        lists.print();
-
+        System.out.println("删除的合并：");
         lists.merge(list2);
         lists.print();
+
+        System.out.println("\n" + "不删除的合并：");
+        list3.merge2(list4);
+        list3.print();
         
 
 
