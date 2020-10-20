@@ -21,6 +21,7 @@ public class Multinomial {
     }
 
     public Node isEmpty(){
+
         return this.head.next = null;
     }
 
@@ -33,8 +34,10 @@ public class Multinomial {
         Node rear = this.head;
         //遍历
         for (int i = 0; i < values.length; i++) {
+            //split()方法拆分字符串
             //以逗号分离系数、指数
             String[] polyInfo = values[i].split(",");
+            //返回用十进制参数表示的整数值
             int coef = Integer.parseInt(polyInfo[0]);
             int expo = Integer.parseInt(polyInfo[1]);
             //生成多项式结点
