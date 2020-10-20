@@ -36,7 +36,7 @@ public class Operators implements java.util.Comparator<String>{
             case "&": value = x&y; break;
             case "^": value = x^y; break;
             case "|": value = x|y; break;
-            default:
+            default: break;
         }
         return value;
     }

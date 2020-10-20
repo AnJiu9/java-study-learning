@@ -41,7 +41,7 @@ public final class SeqStack<T> implements Stack<T> {
 
     @Override
     public String toString() {
-        return super.toString();
+        return this.list.toString();
     }
 
 }

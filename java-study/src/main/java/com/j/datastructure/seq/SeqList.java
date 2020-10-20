@@ -93,7 +93,7 @@ public class SeqList<T> extends Object{
 
     public int search(T key){
         for(int i =0; i<this.n; i++){
-            if(key == this.element[i]){
+            if(key.equals(this.element[i])){
                 return i;
             }
         }

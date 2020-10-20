@@ -42,6 +42,6 @@ public final class LinkedStack<T extends Comparable> implements Stack<T>{
 
     @Override
     public String toString() {
-        return super.toString();
+        return this.list.toString();
     }
 }
