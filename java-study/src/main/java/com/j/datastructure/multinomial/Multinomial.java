@@ -37,7 +37,7 @@ public class Multinomial {
             //split()方法拆分字符串
             //以逗号分离系数、指数
             String[] polyInfo = values[i].split(",");
-            //返回用十进制参数表示的整数值
+            //返回用十进制参数表示的整数值，将字符串转为int（整型对象Integer转换为int基本数据类型
             int coef = Integer.parseInt(polyInfo[0]);
             int expo = Integer.parseInt(polyInfo[1]);
             //生成多项式结点
