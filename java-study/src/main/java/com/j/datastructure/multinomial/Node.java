@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
+
 public class Node {
     /**
      * 数据域，存储数据元素，coefficient:系数;exponent:指数
@@ -36,4 +37,7 @@ public class Node {
     }
 
 
+    public void setNext(Node next) {
+        this.next = next;
+    }
 }
