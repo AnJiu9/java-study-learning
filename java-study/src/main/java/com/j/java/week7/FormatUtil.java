@@ -1,6 +1,9 @@
 package com.j.java.week7;
 
+import javax.swing.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -11,12 +14,19 @@ import java.util.Date;
  **/
 
 public class FormatUtil {
-    public static String format(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-        return sdf.format(date);
+    public String format(Date date) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        return sdf.format(date);
+
+        String result = String.valueOf(date.getYear());
+        return result;
     }
 
-    public static int add(int a, int b) {
-        return a + b;
+    public static void main(String[] args) {
+//        LocalDateTime now = LocalDateTime.now();
+//        System.out.println(now);
+
+        System.out.println(LocalDateTime.now());
+        System.out.println(new Date());
     }
 }
