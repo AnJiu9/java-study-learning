@@ -13,5 +13,8 @@ public class FormatUtilTest {
 //        String actual = FormatUtil.format(new Date());
 //        String expected = "2020/10/23";
 //        assertEquals(expected,actual);
+
+        String actual = FormatUtil.format(new Date());
+        System.out.println(actual);
     }
 }
