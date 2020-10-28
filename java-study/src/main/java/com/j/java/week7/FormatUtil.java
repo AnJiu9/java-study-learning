@@ -1,6 +1,7 @@
 package com.j.java.week7;
 
 import javax.swing.*;
+import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,6 +36,7 @@ public class FormatUtil {
     /**
      * Date对象 时间格式化
      * Double 数据格式化
+     *
      * @param date
      * @return
      */
@@ -42,4 +44,10 @@ public class FormatUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
+
+    public synchronized static String format(Double d) {
+        DecimalFormat formatter = new DecimalFormat("#.##");
+        return formatter.format(d);
+    }
+
 }
