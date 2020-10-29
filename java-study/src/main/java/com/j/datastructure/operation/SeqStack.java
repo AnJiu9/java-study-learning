@@ -9,7 +9,7 @@ import com.j.datastructure.seq.SeqList;
  * @Date 18.10.20
  **/
 
-public final class SeqStack<T> implements Stack<T> {
+public final class SeqStack<T extends Comparable> implements Stack<T> {
     private SeqList<T> list;
 
     public  SeqStack(int length){

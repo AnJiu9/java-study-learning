@@ -11,7 +11,7 @@ import java.security.PublicKey;
  * @Date 13.10.20
  **/
 
-public final class SeqStack<T>  {
+public final class SeqStack<T extends Comparable>  {
     private  SeqList<T> list;
 
     public  SeqStack(int length){
