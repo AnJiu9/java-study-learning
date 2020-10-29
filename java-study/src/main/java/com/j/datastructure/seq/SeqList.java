@@ -1,5 +1,8 @@
 package com.j.datastructure.seq;
 
+import javax.sound.midi.MidiChannel;
+import javax.sound.midi.Soundbank;
+
 /**
  * @ClassName SeqList
  * @Description TODO
@@ -7,14 +10,15 @@ package com.j.datastructure.seq;
  * @Date 13.10.20
  **/
 
-public class SeqList<T extends Comparable> extends Object {
+public class SeqList<T> {
     protected int n;
     protected Object[] element;
     private static final int MIN_CAPACITY = 16;
 
     public SeqList(int length) {
-        if (length < MIN_CAPACITY)
+        if (length < MIN_CAPACITY) {
             length = MIN_CAPACITY;
+        }
         this.element = new Object[length];
         this.n = 0;
     }
@@ -26,8 +30,9 @@ public class SeqList<T extends Comparable> extends Object {
     public SeqList(T[] values) {                    //构造顺序表
         this(values.length * 2);
         for (int i = 0; i < values.length; i++)
-            if (values[i] != null)
+            if (values[i] != null) {
                 this.element[this.n++] = values[i];
+            }
     }
 
     public boolean isEmpty() {
@@ -45,12 +50,14 @@ public class SeqList<T extends Comparable> extends Object {
     }
 
     public void set(int i, T x) {
-        if (x == null)
+        if (x == null) {
             throw new NullPointerException("x == null");
-        if (i >= 0 && i < this.n)
+        }
+        if (i >= 0 && i < this.n) {
             this.element[i] = x;
-        else
-            throw new java.lang.IndexOutOfBoundsException(i + "");
+        } else {
+            throw new IndexOutOfBoundsException(i + "");
+        }
     }
 
     @Override
@@ -132,42 +139,43 @@ public class SeqList<T extends Comparable> extends Object {
         return null;
     }
 
-    public int binarySearch(T key) {
+    public int binarySearch(Integer key) {
         int low = 0;
-        int high = this.element.length - 1;
+        int high = n - 1;
+        int mid = (int) Math.floor(low + (high - low) / 2);
+
+        if ((int) this.element[low] > key) {
+            System.out.println("不存在该值");
+            return -1;
+        } else if ((int) this.element[high] < key) {
+            System.out.println("不存在该值");
+            return -1;
+        }
+
         while (low <= high) {
-            int mid = (low + high) / 2;
-            if (key == this.element[mid]) {
-                System.out.println("此关键字在SeqList中的位置为：" + mid);
+            if (key == (int) this.element[mid]) {
+                System.out.println("此数在该数组的位置为：" + mid);
                 break;
-            }
-            if (key.compareTo(this.element[mid]) > 0) {
+            } else if (key > (int) this.element[mid]) {
                 low = mid + 1;
-            }
-            else if (key.compareTo(this.element[mid]) < 0) {
+                mid = (int) Math.floor(low + (high - low) / 2);
+            } else if (key < (int) this.element[mid]) {
                 high = mid - 1;
+                mid = (int) Math.floor(low + (high - low) / 2);
             }
         }
 
-        return -1;
+        return mid;
     }
 
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
-        String values[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-        SeqList<String> lista = new SeqList<String>(values);
+        Integer values[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        SeqList<Integer> lista = new SeqList<Integer>(values);
         System.out.println(lista.toString());
-//        lista.insert(2, "C");
-//        System.out.println(lista.toString());
-//        lista.insert("F");
-//        System.out.println(lista.toString());
-//        lista.remove(2);
-//        System.out.println(lista.toString());
-//        System.out.println(lista.search("A"));
-
-        lista.binarySearch("K");
+        lista.binarySearch(4);
 
     }
 }
