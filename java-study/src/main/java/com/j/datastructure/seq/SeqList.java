@@ -144,20 +144,21 @@ public class SeqList<T extends Comparable> extends Object {
             if (key.compareTo(this.element[mid]) > 0) {
                 low = mid + 1;
             }
-            if (key.compareTo(this.element[mid]) < 0){
+            else if (key.compareTo(this.element[mid]) < 0) {
                 high = mid - 1;
             }
-            }
-            return -1;
         }
 
+        return -1;
+    }
 
-        public static void main (String[]args){
-            // TODO Auto-generated method stub
 
-            String values[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
-            SeqList<String> lista = new SeqList<String>(values);
-            System.out.println(lista.toString());
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        String values[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+        SeqList<String> lista = new SeqList<String>(values);
+        System.out.println(lista.toString());
 //        lista.insert(2, "C");
 //        System.out.println(lista.toString());
 //        lista.insert("F");
@@ -166,9 +167,9 @@ public class SeqList<T extends Comparable> extends Object {
 //        System.out.println(lista.toString());
 //        System.out.println(lista.search("A"));
 
-            lista.binarySearch("D");
+        lista.binarySearch("K");
 
-        }
+    }
 }
 
 
