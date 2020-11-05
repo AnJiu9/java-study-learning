@@ -142,7 +142,7 @@ public class SeqList<T> {
     public int binarySearch(Integer key) {
         int low = 0;
         int high = n - 1;
-        int mid = (int) Math.floor(low + (high - low) / 2);
+        int mid = (int) Math.floor(low + high  / 2);
 
         if ((int) this.element[low] > key) {
             System.out.println("不存在该值");
@@ -158,10 +158,10 @@ public class SeqList<T> {
                 break;
             } else if (key > (int) this.element[mid]) {
                 low = mid + 1;
-                mid = (int) Math.floor(low + (high - low) / 2);
+                mid = (int) Math.floor(low + high  / 2);
             } else if (key < (int) this.element[mid]) {
                 high = mid - 1;
-                mid = (int) Math.floor(low + (high - low) / 2);
+                mid = (int) Math.floor(low + high  / 2);
             }
         }
 
