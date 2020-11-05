@@ -1,6 +1,7 @@
 package com.j.datastructure.binarytree;
 
 import sun.jvm.hotspot.runtime.VMReg;
+import sun.net.idn.Punycode;
 
 /**
  * @ClassName BinaryTree
@@ -9,7 +10,7 @@ import sun.jvm.hotspot.runtime.VMReg;
  * @Date 2020-11-03 14:23
  **/
 
-public class BinaryTree<T> {
+public class BinaryTree<T extends Comparable>  {
     public BinaryNode<T> root;
 
     public BinaryTree() {
@@ -90,27 +91,70 @@ public class BinaryTree<T> {
         return -1;
     }
 
-    private int s = 0;
+    private int leafNodeCount = 0;
 
-    public void size2() {
-        size2(this.root);
-        System.out.println(s);
+    public void countLeaf() {
+        countLeaf(this.root);
+        System.out.println(leafNodeCount);
     }
 
-    public int size2(BinaryNode<T> p) {
+    public int countLeaf(BinaryNode<T> p) {
         if (p != null) {
-            if (p.left == null && p.right == null) {
-                s++;
+            if (p.isLeaf()) {
+                leafNodeCount++;
             }
-            size2(p.left);
-            size2(p.right);
+            countLeaf(p.left);
+            countLeaf(p.right);
         }
         return -1;
     }
 
+    public int height() {
+        return height(this.root);
+    }
+
+    public int height(BinaryNode<T> p) {
+        if (p == null) {
+            return 0;
+        }
+//        int lh = height(p.left);
+//        int rh = height(p.right);
+//        return (lh >= rh) ? lh + 1 : rh + 1;
+        return Math.max(height(p.left), height(p.right)) + 1;
+    }
+
+    public void insert(T x) {
+        if (x != null) {
+            this.root = new BinaryNode<T>(x, this.root, null);
+        }
+    }
+
+    public BinaryNode<T> insert(BinaryNode<T> p, boolean left, T x) {
+        if (x == null || p == null) {
+            return null;
+        }
+        if (left) {
+            return p.left = new BinaryNode<T>(x, p.left, null);
+        }
+        return p.right = new BinaryNode<T>(x, null, p.right);
+    }
+
+    public BinaryNode<T> search(T key) {
+        BinaryNode<T> current = this.root;
+        while (current != null) {
+            if (key.compareTo(current.data) < 0) {
+                current = current.left;
+            } else if (key.compareTo(current.data) > 0) {
+                current = current.right;
+            } else {
+                return current;
+            }
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
-        String[] prelist = {"A", "B", "D", null, null, null, "C", "E", null, null, "F", "H" };
+        String[] prelist = {"A", "B", "D", null, null, null, "C", "E", null, null, "F", "H"};
         BinaryTree<String> bitree = new BinaryTree<String>(prelist);
         System.out.print("先根：");
         bitree.preorder();
@@ -121,7 +165,17 @@ public class BinaryTree<T> {
         System.out.print("结点总数：");
         bitree.size();
         System.out.print("叶子结点：");
-        bitree.size2();
+        bitree.countLeaf();
+        System.out.print("二叉树高度：");
+        System.out.println(bitree.height());
+        System.out.print("插入根结点：");
+        bitree.insert("I");
+        bitree.preorder();
+        System.out.print("插入X结点作为左孩子：");
+        bitree.insert(bitree.root.left, true, "X");
+        bitree.preorder();
+        System.out.print("查找参数key：");
+        System.out.println(bitree.search("A"));
     }
 
 }

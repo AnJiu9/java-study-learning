@@ -23,6 +23,10 @@ public class BinaryNode<T> {
         this.data = data;
     }
 
+    public boolean isLeaf(){
+        return this.left == null && this.right == null;
+    }
+
     @Override
     public String toString() {
         return this.data.toString();
